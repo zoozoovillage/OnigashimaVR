@@ -110,11 +110,13 @@ public class UtAppScript : MonoBehaviour {
     {
         SavePref(); //初期化する前に現在のサイズと難易度を保存
         panel.GetComponent<CanvasGroup>().alpha = 0f;
+        watchPanel.GetComponent<CanvasGroup>().alpha = 0f;
         messageText.text = "";
         timeMessageText.text = "";
         power = 100;
         endTime = gameTime + (int)Time.time;
         toolFlg = false;
+        watchFlg = false;
         endFlg = false;
         //壁をすべて配列に入れる
         GameObject[] walls = GameObject.

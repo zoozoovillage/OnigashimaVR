@@ -27,20 +27,26 @@ public class UtAvatarScript : MonoBehaviour {
         UtAvatarColliderScript avatarColliderscript =
             GameObject.Find("unitychan")
             .GetComponent<UtAvatarColliderScript>();
-        float h = Input.GetAxis("Horizontal");
+        //float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
+        float velocity = 5f;
 
         //衝突をチェックしてアバターを動かす
         if (avatarColliderscript.collisionFlg == false)
         {
             //衝突なしなら普通に移動
             animator.SetFloat("Speed", v);
-            animator.SetFloat("Direction", h);
+            //animator.SetFloat("Direction", h);
             animator.SetBool("Jump", false);
-            Vector3 vector = new Vector3(0, 0, v);
-            vector = transform.TransformDirection(vector) * 5f;
-            transform.localPosition += vector * Time.fixedDeltaTime;
-            transform.Rotate(0, h, 0);
+
+            Vector3 moveDirection = Camera.main.transform.forward;
+            moveDirection *=  velocity * Time.fixedDeltaTime * v;
+            moveDirection.y = 0.0f;
+            transform.position += moveDirection; 
+            //Vector3 vector = new Vector3(0, 0, v);
+            //vector = transform.TransformDirection(vector) * velocity;           
+            //transform.localPosition += vector * Time.fixedDeltaTime;
+            //transform.Rotate(0, h, 0);
         }
         else
         {
