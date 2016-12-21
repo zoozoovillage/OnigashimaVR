@@ -13,6 +13,12 @@ public class SettingBoardController : MonoBehaviour {
     public float modeChanger = 0;
     public float valueChanger = 0;
     public float speedControler = 0.01f;
+    [SerializeField]
+    Toggle sizeSelect;
+    [SerializeField]
+    Toggle levelSelect;
+    [SerializeField]
+    Button button;
 
     // Use this for initialization
     void Start () {
@@ -38,6 +44,7 @@ public class SettingBoardController : MonoBehaviour {
                 break;
 
             case 0:
+                AllSet();
                 break;
         }
 
@@ -51,19 +58,29 @@ public class SettingBoardController : MonoBehaviour {
         selectSlider.value = selectMode;
     }
     public void SetSize() {
-        //selectMode = 2;
+        sizeSelect.isOn  = true;
+        levelSelect.isOn  = false;
+        button.interactable = false;
         mazeSize += valueChanger;
         if (mazeSize < 5) { mazeSize = 5; }
         if (mazeSize > 30) { mazeSize = 30; }
         sizeSlider.value = mazeSize;
     }
     public void SetLevel() {
-        //selectMode = 1;
+        sizeSelect.isOn  = false;
+        levelSelect.isOn  = true;
+        button.interactable = false;
         mazeLevel += valueChanger;
         if (mazeLevel < 0) { mazeLevel = 0; }
         if (mazeLevel > 10) { mazeLevel = 10; }
         levelSlider.value = mazeLevel;
     }
+    void AllSet() {
+        sizeSelect.isOn  = false;
+        levelSelect.isOn  = false;
+        button.interactable = true;
+    }
+
     void LoadPref() {
         mazeSize = PlayerPrefs.GetFloat("mazeSize");
         mazeLevel = PlayerPrefs.GetFloat("mazeLevel");
