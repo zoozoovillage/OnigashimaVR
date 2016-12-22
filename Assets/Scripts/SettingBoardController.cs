@@ -25,12 +25,12 @@ public class SettingBoardController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-        explanCamera = GameObject.Find("ExplanCamera").GetComponent<Camera>();
-        levelSetCamera = GameObject.Find("LevelSetCamera").GetComponent<Camera>();
-        mainCamera.enabled = false;
-        explanCamera.enabled = false;
-        levelSetCamera.enabled = true;
+        //mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        //explanCamera = GameObject.Find("ExplanCamera").GetComponent<Camera>();
+        //levelSetCamera = GameObject.Find("LevelSetCamera").GetComponent<Camera>();
+        //mainCamera.enabled = false;
+        //explanCamera.enabled = false;
+        //levelSetCamera.enabled = true;
         Application.UnloadLevel("Explan");
 
         selectMode = 2;

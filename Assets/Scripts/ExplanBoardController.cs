@@ -13,10 +13,9 @@ public class ExplanBoardController : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-        mainCamera.enabled = false;
-        explanCamera = GameObject.Find("ExplanCamera").GetComponent<Camera>();
-        explanCamera.enabled = true;
+        //mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        //explanCamera = GameObject.Find("ExplanCamera").GetComponent<Camera>();
+        //explanCamera.enabled = true;
         GameObject.Find("TitleObject").SetActive(false);
         readPoint = 1;
         readSpeed = 0;
