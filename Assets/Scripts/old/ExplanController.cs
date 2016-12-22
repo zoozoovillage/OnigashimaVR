@@ -7,9 +7,15 @@ public class ExplanController : MonoBehaviour {
     public float readPoint = 1;
     public float readSpeed = 0;
     public float scrollSpeed = 0.05f;
-
-	// Use this for initialization
-	void Start () {
+    Camera mainCamera;
+    Camera explanCamera;
+    // Use this for initialization
+    void Start () {
+        mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        explanCamera = GameObject.Find("ExplanCamera").GetComponent<Camera>();
+        mainCamera.enabled = false;
+        explanCamera.enabled = true;
+        GameObject.Find("TitleObject").SetActive(false);
         readPoint = 1;
         readSpeed = 0;
 	}

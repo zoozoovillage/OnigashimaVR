@@ -3,6 +3,9 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class SettingBoardController : MonoBehaviour {
+    Camera mainCamera;
+    Camera explanCamera;
+    Camera levelSetCamera;
     public Slider selectSlider;
     public Slider sizeSlider;
     public Slider levelSlider;
@@ -22,6 +25,14 @@ public class SettingBoardController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        explanCamera = GameObject.Find("ExplanCamera").GetComponent<Camera>();
+        levelSetCamera = GameObject.Find("LevelSetCamera").GetComponent<Camera>();
+        mainCamera.enabled = false;
+        explanCamera.enabled = false;
+        levelSetCamera.enabled = true;
+        Application.UnloadLevel("Explan");
+
         selectMode = 2;
         modeChanger = 0f;
         valueChanger = 0f;
