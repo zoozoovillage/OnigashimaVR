@@ -15,10 +15,11 @@ public class UtAgentColliderScript : MonoBehaviour {
 	}
 
     void OnCollisionEnter(Collision collision) {
-        UtAppScript appscript = Camera.main.GetComponent<UtAppScript>();
+        GameMainScript gameMainScript =
+            GameObject.Find("runaway").GetComponent<GameMainScript>();
         if (collision.gameObject == GameObject.Find("unitychan")) {
-            appscript.BadEnd();
-            //Debug.Log("身柄確保");
+            gameMainScript.BadEnd();
+            Debug.Log("身柄確保");
         }
         else if (collision.gameObject.tag == "ob_wall")
         {

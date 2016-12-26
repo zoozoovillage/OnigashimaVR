@@ -3,19 +3,19 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class ExplanBoardController : MonoBehaviour {
-
     public Scrollbar scrollBar;
     public float readPoint = 1;
     public float readSpeed = 0;
-    public float scrollSpeed = 0.05f;
+    public float scrollSpeed = 0.005f;
     Camera mainCamera;
     Camera explanCamera;
+    public GameObject settingBoard;
+    public GameObject countBoard;
+    public GameObject Runaway;
+
     // Use this for initialization
     void Start()
     {
-        //mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-        //explanCamera = GameObject.Find("ExplanCamera").GetComponent<Camera>();
-        //explanCamera.enabled = true;
         GameObject.Find("TitleObject").SetActive(false);
         readPoint = 1;
         readSpeed = 0;
@@ -27,8 +27,12 @@ public class ExplanBoardController : MonoBehaviour {
         readSpeed = Input.GetAxis("Vertical");
         SetReadPoint();
         if (Input.anyKeyDown) {
-            Application.LoadLevelAdditive("LevelSet");
+            if (!Input.GetKeyDown(KeyCode.UpArrow) && !Input.GetKeyDown(KeyCode.DownArrow)) {
+                OnClick();
+            }
+            
         }
+        
     }
 
     public void SetReadPoint()
@@ -41,6 +45,8 @@ public class ExplanBoardController : MonoBehaviour {
     }
     public void OnClick()
     {
-        Application.LoadLevelAdditive("LevelSet");
+        settingBoard.SetActive(true);
+        //ボタン以外にリモコン用としてInput.anyKeyDownにも呼び出し元あり
+        //countBoard.SetActive(true);
     }
 }

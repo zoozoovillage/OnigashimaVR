@@ -22,17 +22,20 @@ public class SettingBoardController : MonoBehaviour {
     Toggle levelSelect;
     [SerializeField]
     Button button;
+    public GameObject explanBoard;
+    public GameObject Runaway;
+    public GameObject canvas;
+    public GameObject settingPanel;
+    public GameObject cautionPanel;
+    public GameObject watchPanel;
+    public GameObject countBoard;
 
     // Use this for initialization
     void Start () {
-        //mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-        //explanCamera = GameObject.Find("ExplanCamera").GetComponent<Camera>();
-        //levelSetCamera = GameObject.Find("LevelSetCamera").GetComponent<Camera>();
-        //mainCamera.enabled = false;
-        //explanCamera.enabled = false;
-        //levelSetCamera.enabled = true;
-        Application.UnloadLevel("Explan");
-
+        //Application.UnloadLevel("Explan");
+        //OnClick();
+        explanBoard.GetComponent<CanvasGroup>().alpha = 0f;
+        explanBoard.SetActive(false);
         selectMode = 2;
         modeChanger = 0f;
         valueChanger = 0f;
@@ -44,6 +47,9 @@ public class SettingBoardController : MonoBehaviour {
         modeChanger = Input.GetAxis("Vertical") * speedControler;
         valueChanger = Input.GetAxis("Horizontal") * speedControler;
         SetSelectMode();
+        //
+        //Runaway.SetActive(true);
+        //
         switch ((int)selectSlider.value)
         {
             case 2:
@@ -55,6 +61,7 @@ public class SettingBoardController : MonoBehaviour {
                 break;
 
             case 0:
+                
                 AllSet();
                 break;
         }
@@ -75,7 +82,7 @@ public class SettingBoardController : MonoBehaviour {
         mazeSize += valueChanger;
         if (mazeSize < 5) { mazeSize = 5; }
         if (mazeSize > 30) { mazeSize = 30; }
-        sizeSlider.value = mazeSize;
+        sizeSlider.value = mazeSize;  
     }
     public void SetLevel() {
         sizeSelect.isOn  = false;
@@ -90,6 +97,21 @@ public class SettingBoardController : MonoBehaviour {
         sizeSelect.isOn  = false;
         levelSelect.isOn  = false;
         button.interactable = true;
+        SavePref();
+        if (Input.anyKeyDown)
+        {
+            if (!Input.GetKeyDown(KeyCode.UpArrow) && !Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                OnClick();
+            }
+
+        }
+    }
+
+
+    public void OnClick() {
+        countBoard.SetActive(true);   
+        //Runaway.SetActive(true);
     }
 
     void LoadPref() {

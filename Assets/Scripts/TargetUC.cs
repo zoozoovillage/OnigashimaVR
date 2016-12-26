@@ -4,9 +4,8 @@ using UnityStandardAssets.Characters.ThirdPerson;
 
 public class TargetUC : MonoBehaviour {
 
-    public GameObject avator;//unitychanを表す変数
-    public GameObject walkTarget;//WalkTargetを表す変数
-    public GameObject eathan;//Eathanを表す
+    public GameObject walkTarget; //WalkTargetを表す変数
+    public GameObject ethan; //Ethanを表す
 
 
 
@@ -22,11 +21,11 @@ public class TargetUC : MonoBehaviour {
 
     //イーサンの視界
     void OnTriggerEnter(Collider collider) {
-        if (collider.gameObject == avator) {
-            Vector3 avatorShadow = avator.transform.position;
+        if (collider.gameObject == GameObject.Find("unitychan")) {
+            Vector3 avatorShadow = GameObject.Find("unitychan").transform.position;
             walkTarget.transform.position = avatorShadow;
             //第一発見現場まで向かえ！
-            Debug.Log("発見！");
+            Debug.Log("発見UC！");
         }
     }
 }

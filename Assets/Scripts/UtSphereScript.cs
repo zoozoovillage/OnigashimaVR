@@ -17,9 +17,10 @@ public class UtSphereScript : MonoBehaviour {
     //アバターのいるほうに向けて押す
     void FixedUpdate()
     {
-        UtAppScript appscript =
-                Camera.main.GetComponent<UtAppScript>();
-        if (appscript.IsEnd()) { return; }
+        GameMainScript gameMainScript =
+            GameObject.Find("runaway").GetComponent<GameMainScript>();
+
+        if (gameMainScript.IsEnd()) { return; }
         Renderer renderer = GetComponent<Renderer>();
         Rigidbody rigidbody = GetComponent<Rigidbody>();
         if (counter > 0)
@@ -33,7 +34,7 @@ public class UtSphereScript : MonoBehaviour {
         }
         Vector3 v1 = GameObject.Find("unitychan").transform.position;
         Vector3 v2 = transform.position;
-        if (rigidbody.velocity.magnitude < appscript.mazeLevel)
+        if (rigidbody.velocity.magnitude < gameMainScript.mazeLevel)
         {
             Vector3 vd = v1 - v2;
             vd /= vd.magnitude;

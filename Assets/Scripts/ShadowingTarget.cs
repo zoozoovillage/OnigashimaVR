@@ -5,7 +5,6 @@ using System.Collections;
 public class ShadowingTarget : MonoBehaviour {
     //public GameObject avator;
     public GameObject targetArea;
-    //public GameObject cautionPanel;
     private bool tochuhenkou = false;
 
     private System.Random rnd;
@@ -69,10 +68,11 @@ public class ShadowingTarget : MonoBehaviour {
 
     void SetRandomPosition()
     {
-        UtAppScript appscript = Camera.main.GetComponent<UtAppScript>();
+        GameMainScript gameMainScript =
+            GameObject.Find("runaway").GetComponent<GameMainScript>();
         //Debug.Log("ランダムポジション");
-        x = (Random.Range(0,appscript.mazeSize * 4 - 1));
-        z = (Random.Range(0,appscript.mazeSize * 4- 1));
+        x = (Random.Range(0, gameMainScript.mazeSize * 4 - 1));
+        z = (Random.Range(0, gameMainScript.mazeSize * 4- 1));
         targetArea.transform.position = new Vector3(x, 0.0f, z);
     }
 
@@ -91,7 +91,7 @@ public class ShadowingTarget : MonoBehaviour {
         {
             targetArea.tag = "hunter";
             tochuhenkou = true;
-            Debug.Log("探査機：標的確認");
+            //Debug.Log("探査機：標的確認");
             cautionFlg = true;
         }
     }

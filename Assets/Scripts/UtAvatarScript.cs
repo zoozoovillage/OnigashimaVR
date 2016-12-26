@@ -14,9 +14,10 @@ public class UtAvatarScript : MonoBehaviour {
     void FixedUpdate()
     {
         //入力に応じてアバターを動かす
-        UtAppScript appscript =
-            Camera.main.GetComponent<UtAppScript>();
-        if (appscript.IsEnd())
+        GameManager gameManager =
+            GameObject.Find("manager").GetComponent<GameManager>();
+
+        if (gameManager.IsEnd())
         {
             animator.SetFloat("Speed", 0);
             animator.SetFloat("Direction", 0);
@@ -43,10 +44,10 @@ public class UtAvatarScript : MonoBehaviour {
             moveDirection *=  velocity * Time.fixedDeltaTime * v;
             moveDirection.y = 0.0f;
             transform.position += moveDirection; 
-            //Vector3 vector = new Vector3(0, 0, v);
-            //vector = transform.TransformDirection(vector) * velocity;           
-            //transform.localPosition += vector * Time.fixedDeltaTime;
-            //transform.Rotate(0, h, 0);
+            /*Vector3 vector = new Vector3(0, 0, v);
+            vector = transform.TransformDirection(vector) * velocity;           
+            transform.localPosition += vector * Time.fixedDeltaTime;
+            transform.Rotate(0, h, 0);*/
         }
         else
         {
