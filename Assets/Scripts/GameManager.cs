@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
+
     private bool endFlag = false;
 
 
@@ -11,12 +12,19 @@ public class GameManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update()
-    { 
+    {
+        
+    }
+
+    public void Opening() {
+        endFlag = false;
+        Debug.Log("endFlag : " + endFlag);
     }
 
     public void Ending()
     {
         endFlag = true;
+        Debug.Log("endFlag : " + endFlag);
     }
 
     public bool IsEnd()

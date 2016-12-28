@@ -29,14 +29,13 @@ public class SettingBoardController : MonoBehaviour {
     public GameObject cautionPanel;
     public GameObject watchPanel;
     public GameObject countBoard;
+    public GameObject retryObject;
 
     // Use this for initialization
     void Start () {
-        //Application.UnloadLevel("Explan");
-        //OnClick();
         explanBoard.GetComponent<CanvasGroup>().alpha = 0f;
         explanBoard.SetActive(false);
-        selectMode = 2;
+        selectMode = 2f;
         modeChanger = 0f;
         valueChanger = 0f;
         LoadPref();
@@ -44,12 +43,12 @@ public class SettingBoardController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+        retryObject.SetActive(false);
         modeChanger = Input.GetAxis("Vertical") * speedControler;
         valueChanger = Input.GetAxis("Horizontal") * speedControler;
         SetSelectMode();
         //
-        //Runaway.SetActive(true);
-        //
+
         switch ((int)selectSlider.value)
         {
             case 2:
@@ -61,7 +60,6 @@ public class SettingBoardController : MonoBehaviour {
                 break;
 
             case 0:
-                
                 AllSet();
                 break;
         }
@@ -89,7 +87,7 @@ public class SettingBoardController : MonoBehaviour {
         levelSelect.isOn  = true;
         button.interactable = false;
         mazeLevel += valueChanger;
-        if (mazeLevel < 0) { mazeLevel = 0; }
+        if (mazeLevel < 1) { mazeLevel = 1; }
         if (mazeLevel > 10) { mazeLevel = 10; }
         levelSlider.value = mazeLevel;
     }
@@ -102,6 +100,7 @@ public class SettingBoardController : MonoBehaviour {
         {
             if (!Input.GetKeyDown(KeyCode.UpArrow) && !Input.GetKeyDown(KeyCode.DownArrow))
             {
+                
                 OnClick();
             }
 
@@ -110,11 +109,12 @@ public class SettingBoardController : MonoBehaviour {
 
 
     public void OnClick() {
-        countBoard.SetActive(true);   
-        //Runaway.SetActive(true);
+        selectMode = 2f;
+        selectSlider.value = selectMode;
+        countBoard.SetActive(true);
     }
 
-    void LoadPref() {
+    public void LoadPref() {
         mazeSize = PlayerPrefs.GetFloat("mazeSize");
         mazeLevel = PlayerPrefs.GetFloat("mazeLevel");
     }

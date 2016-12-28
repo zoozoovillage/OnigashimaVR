@@ -8,25 +8,26 @@ public class UtAvatarColliderScript : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        collisionFlg = false;
+        collisionFlg = false;        
     }
 
     // Update is called once per frame
     void Update()
     {
+        
     }
 
     //トリガーイベント。壁に当たった時の処理
-    /*void OnTriggerEnter(Collider collider)
+    void OnTriggerEnter(Collider collider)
     {
-        UtAppScript appscript =
-            Camera.main.GetComponent<UtAppScript>();
-        if (appscript.IsEnd()) { return; }
-        collisionFlg = true;
-        appscript.LossPower(1);
+        //collisionFlg = true;
+        Rigidbody rigidbody = GetComponent<Rigidbody>();
+        rigidbody.angularVelocity = Vector3.zero;
+        rigidbody.velocity = Vector3.zero;
+
     }
 
-    void OnTriggerExit(Collider collider)
+    /*void OnTriggerExit(Collider collider)
     {
         collisionFlg = false;
     }*/

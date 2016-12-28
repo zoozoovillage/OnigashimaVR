@@ -25,7 +25,7 @@ public class TargetUC : MonoBehaviour {
             Vector3 avatorShadow = GameObject.Find("unitychan").transform.position;
             walkTarget.transform.position = avatorShadow;
             //第一発見現場まで向かえ！
-            Debug.Log("発見UC！");
+            //Debug.Log("発見UC！");
         }
     }
 }

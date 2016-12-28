@@ -5,19 +5,35 @@ using System.Collections;
 public class CountBoardController : MonoBehaviour {
 
     public GameObject Runaway;
+    public GameObject manager;
     public GameObject settingBoard;
+    public GameObject RetryObject;
+    public GameObject goal;
     // Use this for initialization
     void Start () {
-        settingBoard.SetActive(false);
+        //StartCoroutine(StartWithDelay());
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
-    public void OnClick() {
-        //Debug.Log("押したよ");
+    //キャラ紹介アニメーション追加予定
+    /*IEnumerator StartWithDelay()
+    {
+        Debug.Log("ここにキャラ紹介アニメーション追加予定");  
+        yield return new WaitForSeconds(5);
         Runaway.SetActive(true);
+    }*/
+
+    // Update is called once per frame
+    void Update () {
+        settingBoard.SetActive(false);
+        RetryObject.SetActive(false);
+        goal.SetActive(true);
+        Runaway.SetActive(true);
+        GameManager gameManager = manager.GetComponent<GameManager>();
+        GameMainScript gameMainScript = Runaway.GetComponent<GameMainScript>();
+        if (gameManager.IsEnd()) {
+            gameMainScript.DoReset();
+        }
     }
+
+    
 }

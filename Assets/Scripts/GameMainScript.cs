@@ -19,6 +19,8 @@ public class GameMainScript : MonoBehaviour {
     public GameObject settingBoard;
     public GameObject countBoard;
     public GameObject canvas;
+    public GameObject retryButton;
+    public GameObject retryObject;
 
     public System.Random rnd; //ランダム用のクラス 
     private bool endFlg = false; //終了フラグ
@@ -26,22 +28,21 @@ public class GameMainScript : MonoBehaviour {
     public int gameTime = 300; //制限時間
     private int playTime = 300; //　現在の残り時間
     private int endTime = 300; //　終了予定時間
-    public int mazeSize = 10; //　迷路のサイズ
+    public int mazeSize = 5; //　迷路のサイズ
     public float mazeLevel = 1; //迷路の難易度
     private int hiScore = 0;  //ハイスコア用の変数
     private bool toolFlg = false;//　リセットボタンの表示・非表示用フラグ
     private bool watchFlg = false;//　時計の表示・非表示用フラグ
+    //public bool retryFlg = false; //リセットではなくendからのリトライかどうか
 
     // Use this for initialization
     void Start()
     {
-        //settingBoard.SetActive(false);
-        //settingBoard.GetComponent<CanvasGroup>().alpha = 0f;
-        canvas.GetComponent<CanvasGroup>().alpha = 1f;
-        countBoard.SetActive(false);
-        rnd = new System.Random(System.Environment.TickCount);
+        //canvas.GetComponent<CanvasGroup>().alpha = 1f;
+        //countBoard.SetActive(false);
+        //rnd = new System.Random(System.Environment.TickCount);
         //ランダムの決定(迷路の作成準備)
-        LoadPref();
+        //LoadPref();
         //各種設定の読み込み
         ReSet();
         //迷路の初期化
@@ -60,23 +61,26 @@ public class GameMainScript : MonoBehaviour {
             if (!toolFlg) { SavePref(); }
         }*/
         //終了チェック。時間の更新。終了時間のチェック
+        
         if (endFlg) { return; }
         playTime = endTime - (int)Time.time;
         timeText.text = "TIME: " + playTime;
         powerText.text = "POWER: " + power;
         CheckTime();
         CountDownTime();
-
-        if (Input.anyKeyDown)
-        {
-            //Debug.Log("時計の表示");
-            if (!Input.GetKeyDown(KeyCode.UpArrow) && !Input.GetKeyDown(KeyCode.DownArrow)&& !Input.GetKeyDown(KeyCode.LeftArrow) && !Input.GetKeyDown(KeyCode.RightArrow))
+        if (endFlg == false) {
+            if (Input.anyKeyDown)
             {
+                //Debug.Log("時計の表示");
+                if (!Input.GetKeyDown(KeyCode.UpArrow) && !Input.GetKeyDown(KeyCode.DownArrow) && !Input.GetKeyDown(KeyCode.LeftArrow) && !Input.GetKeyDown(KeyCode.RightArrow))
+                {
                     watchFlg = !watchFlg;
                     watchPanel.GetComponent<CanvasGroup>().alpha =
                         watchFlg ? 1f : 0f;
+                }
             }
         }
+        
     }
 
     // SizeSliderの値を変数に設定
@@ -91,11 +95,11 @@ public class GameMainScript : MonoBehaviour {
         mazeLevel = (int)levelSlider.value;
     }
 
-    //ResetButtonでリセット(デバッグ用)
-    /*public void DoReset()
+    //ResetButtonでリセット
+    public void DoReset()
     {
         ReSet();
-    }*/
+    }
 
     //PlayerPrefsから設定をロードする
     void LoadPref()
@@ -118,7 +122,18 @@ public class GameMainScript : MonoBehaviour {
     //他、必要なフィールドの初期化
     void ReSet()
     {
-        SavePref(); //初期化する前に現在のサイズと難易度を保存
+        countBoard.SetActive(false);
+        endFlg = false;
+        Debug.Log("endFlg : " + endFlg);
+        GameManager gameManager =
+            GameObject.Find("manager").GetComponent<GameManager>();
+        gameManager.Opening();
+        canvas.GetComponent<CanvasGroup>().alpha = 1f;
+        rnd = new System.Random(System.Environment.TickCount);
+        LoadPref();
+        //各種設定の読み込み
+        //
+        //SavePref(); //初期化する前に現在のサイズと難易度を保存
         panel.GetComponent<CanvasGroup>().alpha = 0f;
         watchPanel.GetComponent<CanvasGroup>().alpha = 0f;
         messageText.text = "";
@@ -127,7 +142,7 @@ public class GameMainScript : MonoBehaviour {
         endTime = gameTime + (int)Time.time;
         toolFlg = false;
         watchFlg = false;
-        endFlg = false;
+        
         //壁をすべて配列に入れる
         GameObject[] walls = GameObject.
             FindGameObjectsWithTag("ob_wall");
@@ -154,12 +169,10 @@ public class GameMainScript : MonoBehaviour {
         }
         CreateMazeData();
         CreateSphere();
-        /*GameObject.Find("unitychan")
-            .GetComponent<UtAvatarColliderScript>()
-            .collisionFlg = false; */
+
         GameObject.Find("ground").GetComponent<Renderer>()
             .material.color = Color.white;
-        settingBoard.SetActive(false); //時間差で前のシーンを消す
+        //settingBoard.SetActive(false); //時間差で前のシーンを消す
     }
 
     //迷路の設計図の生成メソッド
@@ -340,7 +353,7 @@ public class GameMainScript : MonoBehaviour {
     public bool IsEnd()
     {
         return endFlg;
-    }
+    } 
 
     //パワーダウン
     public void LossPower(int n)
@@ -366,14 +379,16 @@ public class GameMainScript : MonoBehaviour {
     public void BadEnd()
     {
         endFlg = true;
-        Debug.Log("エンディング");
         GameManager gameManager =
             GameObject.Find("manager").GetComponent<GameManager>();
         gameManager.Ending();
+        //retryFlg = true;
         int score = (int)(power * mazeLevel + playTime * mazeSize);
         messageText.color = Color.blue;
         messageText.text = "GAMEOVER";
-        PlayerPrefs.SetInt("hiScore", 1);//PlayerPrefsに最小値"1"を保存
+        PlayerPrefs.SetInt("hiScore", 1);//PlayerPrefsに最小値"1"を保存    
+        retryButton.SetActive(true);
+        Clean();
     }
 
     //ゲームクリア時の処理
@@ -396,5 +411,35 @@ public class GameMainScript : MonoBehaviour {
         }
         msg += "[" + score + "]";
         messageText.text = msg;
+        retryButton.SetActive(true);
+        Clean();
+    }
+
+    void Clean() {
+        //壁をすべて配列に入れる
+        GameObject[] walls = GameObject.
+            FindGameObjectsWithTag("ob_wall");
+        //壁をすべて破棄
+        foreach (GameObject obj in walls)
+        {
+            GameObject.Destroy(obj);
+        }
+        //球体をすべて配列に入れる
+        GameObject[] sps = GameObject.
+            FindGameObjectsWithTag("sphere");
+        //球体をすべて破棄
+        foreach (GameObject obj in sps)
+        {
+            GameObject.Destroy(obj);
+        }
+        //鬼をすべて配列に入れる
+        GameObject[] opf = GameObject.
+            FindGameObjectsWithTag("oniPrefab");
+        //鬼をすべて破棄
+        foreach (GameObject obj in opf)
+        {
+            GameObject.Destroy(obj);
+        }
+        GameObject.Find("CautionPanel").GetComponent<CanvasGroup>().alpha = 0f;
     }
 }

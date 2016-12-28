@@ -17,10 +17,9 @@ public class UtSphereScript : MonoBehaviour {
     //アバターのいるほうに向けて押す
     void FixedUpdate()
     {
-        GameMainScript gameMainScript =
-            GameObject.Find("runaway").GetComponent<GameMainScript>();
-
-        if (gameMainScript.IsEnd()) { return; }
+        GameManager gameManager =
+            GameObject.Find("manager").GetComponent<GameManager>();
+        if (gameManager.IsEnd()) { return; }
         Renderer renderer = GetComponent<Renderer>();
         Rigidbody rigidbody = GetComponent<Rigidbody>();
         if (counter > 0)
@@ -34,6 +33,8 @@ public class UtSphereScript : MonoBehaviour {
         }
         Vector3 v1 = GameObject.Find("unitychan").transform.position;
         Vector3 v2 = transform.position;
+        GameMainScript gameMainScript =
+            GameObject.Find("runaway").GetComponent<GameMainScript>();
         if (rigidbody.velocity.magnitude < gameMainScript.mazeLevel)
         {
             Vector3 vd = v1 - v2;
@@ -44,17 +45,19 @@ public class UtSphereScript : MonoBehaviour {
 
     void OnCollisionEnter(Collision collider)
     {
-        UtAppScript appscript =
-                Camera.main.GetComponent<UtAppScript>();
-        if (appscript.IsEnd()) { return; }
+        GameManager gameManager =
+                GameObject.Find("manager").GetComponent<GameManager>();
+        GameMainScript gameMainScript =
+            GameObject.Find("runaway").GetComponent<GameMainScript>();
+        if (gameManager.IsEnd()) { return; }
         if (counter > 0) { return; }
         if (collider.gameObject.name == "unitychan")
         {
             Renderer renderer = GetComponent<Renderer>();
             oldc = renderer.material.color;
             renderer.material.color = new Color(0, 0, 1, 0.5f);
-            counter = (int)(1000 / appscript.mazeLevel);
-            appscript.LossPower(10);
+            counter = (int)(1000 / gameMainScript.mazeLevel);
+            gameMainScript.LossPower(10);
             GameObject.Find("ground").GetComponent<Renderer>()
                 .material.color = Color.red;
         }
