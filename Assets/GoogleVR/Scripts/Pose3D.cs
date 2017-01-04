@@ -36,12 +36,28 @@ public class Pose3D {
     }
   }
 
+    //’Ç‹L20161230
+    public bool rotationFlag = false;
+
+
   /// Default constructor.
   /// Initializes position to the origin and orientation to the identity rotation.
-  public Pose3D() {
+    public Pose3D() {
     Position = Vector3.zero;
-    Orientation = Quaternion.identity;
-    Matrix = Matrix4x4.identity;
+        //Orientation = Quaternion.identity;
+        //ˆÈ‰º20161230’Ç‹L
+        if (rotationFlag == true)
+        {
+            Orientation = Quaternion.Euler(0, 0, 0);
+            //Debug.Log("Euler(0, 0, 0)");
+        }
+        else
+        {
+            Orientation = Quaternion.identity;
+            //Debug.Log("Quaternion.identity");
+        }
+
+        Matrix = Matrix4x4.identity;
   }
 
   /// Constructor that takes a Vector3 and a Quaternion.

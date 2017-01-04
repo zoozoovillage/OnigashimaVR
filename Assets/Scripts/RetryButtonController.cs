@@ -5,6 +5,9 @@ public class RetryButtonController : MonoBehaviour {
 
     public GameObject manager;
     public GameObject retryObject;
+    //public GameObject SettingBoard;
+    //public GameObject unitychan;
+
     // Use this for initialization
     void Start () {
 	
@@ -26,6 +29,6 @@ public class RetryButtonController : MonoBehaviour {
     public void OnClick()
     {
         retryObject.SetActive(true);
-        //retryButton.SetActive(false);
+        
     }
 }
