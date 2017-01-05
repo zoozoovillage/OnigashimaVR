@@ -21,6 +21,7 @@ public class GameMainScript : MonoBehaviour {
     public GameObject canvas;
     public GameObject retryButton;
     public GameObject retryObject;
+    public GameObject manager;
 
     public System.Random rnd; //ランダム用のクラス 
     private bool endFlg = false; //終了フラグ
@@ -52,14 +53,14 @@ public class GameMainScript : MonoBehaviour {
     void Update()
     {
         // スペースバーで設定ウィンドウをON/OFFにする(ただしデバッグ用)
-        /*if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             //Debug.Log("設定変更");
             toolFlg = !toolFlg;
             panel.GetComponent<CanvasGroup>().alpha =
                 toolFlg ? 1f : 0f;
             if (!toolFlg) { SavePref(); }
-        }*/
+        }
         //終了チェック。時間の更新。終了時間のチェック
         
         if (endFlg) { return; }
@@ -105,7 +106,9 @@ public class GameMainScript : MonoBehaviour {
     void LoadPref()
     {
         mazeSize = PlayerPrefs.GetInt("mazeSize");
+        //Debug.Log("メインLoadPref()のmazeSize : " + mazeSize);
         mazeLevel = PlayerPrefs.GetFloat("mazeLevel");
+        //Debug.Log("メインLoadPref()のmazeLevel : " + mazeLevel);
         hiScore = PlayerPrefs.GetInt("hiScore");
         if (mazeSize < 5) { mazeSize = 5; }
         if (mazeLevel < 1) { mazeLevel = 1; }
@@ -124,7 +127,7 @@ public class GameMainScript : MonoBehaviour {
     {
         countBoard.SetActive(false);
         endFlg = false;
-        Debug.Log("endFlg : " + endFlg);
+        //Debug.Log("endFlg : " + endFlg);
         GameManager gameManager =
             GameObject.Find("manager").GetComponent<GameManager>();
         gameManager.Opening();
@@ -179,6 +182,7 @@ public class GameMainScript : MonoBehaviour {
     void CreateMazeData()
     {
         int mazeW = mazeSize * 4 + 2;//実際の迷路の長さは選択値の4倍
+        //Debug.Log("設計図mazesize"+mazeSize);
         bool[,] fdata = new bool[mazeW, mazeW];
         for (int i = 0; i < mazeW; i++)
         {
@@ -255,6 +259,7 @@ public class GameMainScript : MonoBehaviour {
     void CreateMaze(bool[,] data)
     {
         int mazeW = mazeSize * 4 + 2;
+        //Debug.Log("作成mazesize" + mazeSize);
         Texture txtr = Resources.Load<Texture>("CliffAlbedoSpecular");
         for (int i = 0; i < mazeW; i++)
         {
@@ -363,6 +368,7 @@ public class GameMainScript : MonoBehaviour {
         {
             power = 0;
             BadEnd();
+            Debug.Log("LossPower()");
         }
     }
 
@@ -372,6 +378,7 @@ public class GameMainScript : MonoBehaviour {
         if (playTime <= 0)
         {
             BadEnd();
+            Debug.Log("CheckTime()");
         }
     }
 
@@ -441,5 +448,7 @@ public class GameMainScript : MonoBehaviour {
             GameObject.Destroy(obj);
         }
         GameObject.Find("CautionPanel").GetComponent<CanvasGroup>().alpha = 0f;
+        watchFlg = false;
+        watchPanel.GetComponent<CanvasGroup>().alpha = 0f;
     }
 }

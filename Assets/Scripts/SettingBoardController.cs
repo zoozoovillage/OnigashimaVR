@@ -12,6 +12,7 @@ public class SettingBoardController : MonoBehaviour {
     public float selectMode = 2;
     public float mazeValue = 1;
     public float mazeSize = 10;
+    public int MazeSize = 1;
     public float mazeLevel = 1;
     public float modeChanger = 0;
     public float valueChanger = 0;
@@ -30,6 +31,8 @@ public class SettingBoardController : MonoBehaviour {
     public GameObject watchPanel;
     public GameObject countBoard;
     public GameObject retryObject;
+    public GameObject managaer;
+         
 
     // Use this for initialization
     void Start () {
@@ -115,12 +118,20 @@ public class SettingBoardController : MonoBehaviour {
     }
 
     public void LoadPref() {
-        mazeSize = PlayerPrefs.GetFloat("mazeSize");
+        mazeSize = PlayerPrefs.GetInt("mazeSize");
+        //Debug.Log("セッティングloadPのmazesize" + mazeSize);
         mazeLevel = PlayerPrefs.GetFloat("mazeLevel");
+        //Debug.Log("セッティングloadPのmazeLevel" + mazeLevel);
     }
     void SavePref() {
-        PlayerPrefs.SetFloat("mazeSize",mazeSize);
+        mazeSize = sizeSlider.value;
+        MazeSize = (int)mazeSize;
+        PlayerPrefs.SetInt("mazeSize",MazeSize);
+        //Debug.Log("セッティングSavePのmazesize" + MazeSize);
+        mazeLevel = levelSlider.value;
         PlayerPrefs.SetFloat("mazeLevel",mazeLevel);
+        //Debug.Log("セッティングSavePのmazeLevel" + mazeLevel);
+        GameManager gameManager = managaer.GetComponent<GameManager>();
     }
 
 }

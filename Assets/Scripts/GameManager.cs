@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour {
     private bool endFlag = false;
 
 
+
     // Use this for initialization
     void Start () {   
     }
@@ -18,18 +19,19 @@ public class GameManager : MonoBehaviour {
 
     public void Opening() {
         endFlag = false;
-        Debug.Log("endFlag : " + endFlag);
+        //Debug.Log("endFlag : " + endFlag);
     }
 
     public void Ending()
     {
         endFlag = true;
-        Debug.Log("endFlag : " + endFlag);
+        //Debug.Log("endFlag : " + endFlag);
     }
 
     public bool IsEnd()
     {
         return endFlag;
     }
+
 
 }

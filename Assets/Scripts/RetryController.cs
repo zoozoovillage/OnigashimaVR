@@ -11,6 +11,7 @@ public class RetryController : MonoBehaviour {
     public GameObject SettingBoard;
     public GameObject unitychan;
     public GameObject MainCamera;
+    public GameObject CameraController;
     // Use this for initialization
     void Start () {
         /*GameObject.Find("ground").GetComponent<Renderer>()
@@ -23,9 +24,10 @@ public class RetryController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         retryButton.SetActive(false);
-        GameObject.Find("ground").GetComponent<Renderer>()
+        if (runaway.activeSelf) {
+            GameObject.Find("ground").GetComponent<Renderer>()
                 .material.color = Color.white;
-
+        }
         canvas.GetComponent<CanvasGroup>().alpha = 0f;
         runaway.SetActive(false);
         settingBoard.SetActive(true);
@@ -34,17 +36,24 @@ public class RetryController : MonoBehaviour {
         //ボードのポジションの調整
         Vector3 pos = unitychan.transform.position;
         pos.z += 300;
-        Debug.Log("pos.z =" + pos.z);
+        //Debug.Log("pos.z =" + pos.z);
         SettingBoard.transform.position = pos;
         //視界の調整
         Quaternion rot = MainCamera.transform.rotation;
 
-        Debug.Log("調整前 rot.x =" + rot.x + " rot.y =" + rot.y);  
         //rot.x = 0;
-        //rot.y = 0;
-        //Camera.main.transform.rotation = rot;
-        MainCamera.transform.rotation = Quaternion.Euler(0, 0, 0);
-        Debug.Log("調整後 rot.x =" + rot.x + " rot.y =" + rot.y);
+        rot.y = 0;
+        rot.z = 0;
+        MainCamera.transform.rotation = rot;
+        //rot = MainCamera.transform.rotation;
+        //Quaternion startQ = Quaternion.Euler(0f, 0f, 0f);
+        //MainCamera.transform.rotation = startQ;
+        //CameraController.transform.rotation = startQ;
+        //gvrがmaincameraのrotationを制御しているため以下の一文を追加する。
+        GvrViewer.Instance.Recenter();
+        CameraController.transform.rotation = rot;
+        CameraControllerScript cameraController = CameraController.GetComponent<CameraControllerScript>();
+        cameraController.Recenter();
         
     }
 }

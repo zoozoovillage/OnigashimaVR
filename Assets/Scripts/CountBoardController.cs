@@ -9,6 +9,8 @@ public class CountBoardController : MonoBehaviour {
     public GameObject settingBoard;
     public GameObject RetryObject;
     public GameObject goal;
+    public GameObject CameraController;
+ 
     // Use this for initialization
     void Start () {
         //StartCoroutine(StartWithDelay());
@@ -33,6 +35,13 @@ public class CountBoardController : MonoBehaviour {
         if (gameManager.IsEnd()) {
             gameMainScript.DoReset();
         }
+        Quaternion CCrot = CameraController.transform.rotation;
+        CCrot.x = 0;
+        CCrot.y = 0;
+        CCrot.z = 0;
+        CameraController.transform.rotation = CCrot;
+        //CameraControllerScript cameraControllerScript = CameraController.GetComponent<CameraControllerScript>();
+
     }
 
     
