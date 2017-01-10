@@ -19,5 +19,6 @@ public class SettingScreenController : MonoBehaviour {
         rot.x = 0;
         rot.y = 0;
         Camera.main.transform.rotation = rot;
+        Debug.Log("SSCscript");
     }
 }
