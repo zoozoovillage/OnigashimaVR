@@ -9,6 +9,7 @@ public class ExplanBoardController : MonoBehaviour {
     public float scrollSpeed = 0.005f;
     Camera mainCamera;
     Camera explanCamera;
+    public GameObject titleBoard;
     public GameObject settingBoard;
     public GameObject countBoard;
     public GameObject Runaway;
@@ -16,7 +17,7 @@ public class ExplanBoardController : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        GameObject.Find("TitleObject").SetActive(false);
+        titleBoard.SetActive(false);
         readPoint = 1;
         readSpeed = 0;
     }
