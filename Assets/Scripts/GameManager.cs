@@ -2,20 +2,9 @@
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
-
+    //managerオブジェクトにアタッチ
+    //リトライに関わるメソッドおよびフラグを管理
     private bool endFlag = false;
-
-
-
-    // Use this for initialization
-    void Start () {   
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void Opening() {
         endFlag = false;
@@ -32,6 +21,4 @@ public class GameManager : MonoBehaviour {
     {
         return endFlag;
     }
-
-
 }

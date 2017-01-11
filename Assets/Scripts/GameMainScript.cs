@@ -4,8 +4,7 @@ using UnityEngine.Rendering;
 using System.Collections;
 
 public class GameMainScript : MonoBehaviour {
-
-    //GUI部品関係(注：シーンにあるオブジェクトと繋げる必要がある)
+    //runawayオブジェクトにアタッチ
     public Text powerText;
     public Text timeText;
     public Text messageText;
@@ -34,17 +33,10 @@ public class GameMainScript : MonoBehaviour {
     private int hiScore = 0;  //ハイスコア用の変数
     private bool toolFlg = false;//　リセットボタンの表示・非表示用フラグ
     private bool watchFlg = false;//　時計の表示・非表示用フラグ
-    //public bool retryFlg = false; //リセットではなくendからのリトライかどうか
 
     // Use this for initialization
     void Start()
     {
-        //canvas.GetComponent<CanvasGroup>().alpha = 1f;
-        //countBoard.SetActive(false);
-        //rnd = new System.Random(System.Environment.TickCount);
-        //ランダムの決定(迷路の作成準備)
-        //LoadPref();
-        //各種設定の読み込み
         ReSet();
         //迷路の初期化
     }
@@ -61,8 +53,8 @@ public class GameMainScript : MonoBehaviour {
                 toolFlg ? 1f : 0f;
             if (!toolFlg) { SavePref(); }
         }
-        //終了チェック。時間の更新。終了時間のチェック
-        
+
+        //終了チェック。時間の更新。終了時間のチェック。
         if (endFlg) { return; }
         playTime = endTime - (int)Time.time;
         timeText.text = "TIME: " + playTime;
@@ -81,28 +73,27 @@ public class GameMainScript : MonoBehaviour {
                 }
             }
         }
-        
     }
 
-    // SizeSliderの値を変数に設定
+    // SizeSliderの値を変数に設定する。
     public void SetSizeSlider()
     {
         mazeSize = (int)sizeSlider.value;
     }
 
-    //LevelSliderの値を変数に設定
+    //LevelSliderの値を変数に設定する。
     public void SetLevelSlider()
     {
         mazeLevel = (int)levelSlider.value;
     }
 
-    //ResetButtonでリセット
+    //ResetButtonでリセットする。
     public void DoReset()
     {
         ReSet();
     }
 
-    //PlayerPrefsから設定をロードする
+    //PlayerPrefsから設定をロードする。
     void LoadPref()
     {
         mazeSize = PlayerPrefs.GetInt("mazeSize");
@@ -121,8 +112,8 @@ public class GameMainScript : MonoBehaviour {
         PlayerPrefs.SetInt("mazeSize", mazeSize);
         PlayerPrefs.SetFloat("mazeLevel", mazeLevel);
     }
-    //迷路の初期化。現在の迷路を消去し、迷路を作成
-    //他、必要なフィールドの初期化
+    //迷路の初期化。現在の迷路を消去し、迷路を作成しなおす。
+    //他、必要なフィールドの初期化も行う。
     void ReSet()
     {
         countBoard.SetActive(false);
@@ -134,9 +125,6 @@ public class GameMainScript : MonoBehaviour {
         canvas.GetComponent<CanvasGroup>().alpha = 1f;
         rnd = new System.Random(System.Environment.TickCount);
         LoadPref();
-        //各種設定の読み込み
-        //
-        //SavePref(); //初期化する前に現在のサイズと難易度を保存
         panel.GetComponent<CanvasGroup>().alpha = 0f;
         watchPanel.GetComponent<CanvasGroup>().alpha = 0f;
         messageText.text = "";
@@ -172,10 +160,8 @@ public class GameMainScript : MonoBehaviour {
         }
         CreateMazeData();
         CreateSphere();
-
         GameObject.Find("ground").GetComponent<Renderer>()
             .material.color = Color.white;
-        //settingBoard.SetActive(false); //時間差で前のシーンを消す
     }
 
     //迷路の設計図の生成メソッド
@@ -252,7 +238,6 @@ public class GameMainScript : MonoBehaviour {
         Vector3 goalpos = new Vector3(gdatas[gn, 0],
             1.5f, gdatas[gn, 1]);
         GameObject.Find("goal").transform.position = goalpos;
-
     }
 
     //　迷路オブジェクトの生成メソッド
@@ -389,7 +374,6 @@ public class GameMainScript : MonoBehaviour {
         GameManager gameManager =
             GameObject.Find("manager").GetComponent<GameManager>();
         gameManager.Ending();
-        //retryFlg = true;
         int score = (int)(power * mazeLevel + playTime * mazeSize);
         messageText.color = Color.blue;
         messageText.text = "GAMEOVER";

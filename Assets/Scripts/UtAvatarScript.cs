@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class UtAvatarScript : MonoBehaviour {
+    //unitychanにアタッチ
     Animator animator;
 
     // フィールドの初期化
@@ -44,10 +45,6 @@ public class UtAvatarScript : MonoBehaviour {
             moveDirection *=  velocity * Time.fixedDeltaTime * v;
             moveDirection.y = 0.0f;
             transform.position += moveDirection; 
-            /*Vector3 vector = new Vector3(0, 0, v);
-            vector = transform.TransformDirection(vector) * velocity;           
-            transform.localPosition += vector * Time.fixedDeltaTime;
-            transform.Rotate(0, h, 0);*/
         }
         else
         {
@@ -62,5 +59,4 @@ public class UtAvatarScript : MonoBehaviour {
             GetComponent<Rigidbody>().angularVelocity = new Vector3(0, 0, 0);
         }
     }
-
 }

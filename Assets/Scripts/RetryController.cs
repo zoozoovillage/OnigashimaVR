@@ -3,6 +3,8 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class RetryController : MonoBehaviour {
+    //RetryObjectにアタッチ
+    //オブジェクトの消滅と生成およびキー入力の変更を円滑に引き継がせる
     public GameObject runaway;
     public GameObject settingBoard;
     public GameObject canvas;
@@ -14,11 +16,6 @@ public class RetryController : MonoBehaviour {
     public GameObject CameraController;
     // Use this for initialization
     void Start () {
-        /*GameObject.Find("ground").GetComponent<Renderer>()
-                .material.color = Color.white;
-        canvas.GetComponent<CanvasGroup>().alpha = 0f;
-        goal.SetActive(false);
-        settingBoard.SetActive(true);*/
     }
 	
 	// Update is called once per frame
@@ -45,10 +42,7 @@ public class RetryController : MonoBehaviour {
         rot.y = 0;
         rot.z = 0;
         MainCamera.transform.rotation = rot;
-        //rot = MainCamera.transform.rotation;
-        //Quaternion startQ = Quaternion.Euler(0f, 0f, 0f);
-        //MainCamera.transform.rotation = startQ;
-        //CameraController.transform.rotation = startQ;
+
         //gvrがmaincameraのrotationを制御しているため以下の一文を追加する。
         GvrViewer.Instance.Recenter();
         CameraController.transform.rotation = rot;

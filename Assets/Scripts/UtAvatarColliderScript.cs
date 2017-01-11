@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class UtAvatarColliderScript : MonoBehaviour {
+    //unitychanにアタッチ
     public bool collisionFlg;
     //衝突状況を示すフラグ変数
 

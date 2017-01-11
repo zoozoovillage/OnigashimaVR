@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class ExplanBoardController : MonoBehaviour {
+    //ExplanBoardオブジェクトにアタッチ
     public Scrollbar scrollBar;
     public float readPoint = 1;
     public float readSpeed = 0;
@@ -31,9 +32,7 @@ public class ExplanBoardController : MonoBehaviour {
             if (!Input.GetKeyDown(KeyCode.UpArrow) && !Input.GetKeyDown(KeyCode.DownArrow)) {
                 OnClick();
             }
-            
         }
-        
     }
 
     public void SetReadPoint()
@@ -44,10 +43,10 @@ public class ExplanBoardController : MonoBehaviour {
         if (readPoint > 1) { readPoint = 1; }
         scrollBar.value = readPoint;
     }
+
     public void OnClick()
     {
         settingBoard.SetActive(true);
-        //ボタン以外にリモコン用としてInput.anyKeyDownにも呼び出し元あり
-        //countBoard.SetActive(true);
+        //ボタン以外にリモコン用としてInput.anyKeyDownにも呼び出し元あり。
     }
 }

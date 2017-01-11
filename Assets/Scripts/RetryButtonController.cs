@@ -2,17 +2,11 @@
 using System.Collections;
 
 public class RetryButtonController : MonoBehaviour {
-
+    //メインカメラのキャンバスのメッセージのリトライボタンにアタッチ
+    //ゲーム終了後にキー入力をエニイに対応させる。
     public GameObject manager;
     public GameObject retryObject;
-    //public GameObject SettingBoard;
-    //public GameObject unitychan;
 
-    // Use this for initialization
-    void Start () {
-	
-	}
-	
 	// Update is called once per frame
 	void Update () {
         GameManager gameManager =
@@ -28,7 +22,6 @@ public class RetryButtonController : MonoBehaviour {
 
     public void OnClick()
     {
-        retryObject.SetActive(true);
-        
+        retryObject.SetActive(true);   
     }
 }

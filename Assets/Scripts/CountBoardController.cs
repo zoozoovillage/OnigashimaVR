@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class CountBoardController : MonoBehaviour {
-
+    //CoountBoardオブジェクトにアタッチ
     public GameObject Runaway;
     public GameObject manager;
     public GameObject settingBoard;
@@ -13,16 +13,7 @@ public class CountBoardController : MonoBehaviour {
  
     // Use this for initialization
     void Start () {
-        //StartCoroutine(StartWithDelay());
     }
-
-    //キャラ紹介アニメーション追加予定
-    /*IEnumerator StartWithDelay()
-    {
-        Debug.Log("ここにキャラ紹介アニメーション追加予定");  
-        yield return new WaitForSeconds(5);
-        Runaway.SetActive(true);
-    }*/
 
     // Update is called once per frame
     void Update () {
@@ -40,7 +31,6 @@ public class CountBoardController : MonoBehaviour {
         CCrot.y = 0;
         CCrot.z = 0;
         CameraController.transform.rotation = CCrot;
-        //CameraControllerScript cameraControllerScript = CameraController.GetComponent<CameraControllerScript>();
 
     }
 

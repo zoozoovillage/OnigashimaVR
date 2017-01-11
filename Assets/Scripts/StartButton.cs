@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class StartButton : MonoBehaviour {
+    //TitleObjectのCanvasにアタッチ
     public GameObject StartCamera;
     public GameObject explanBoard;
     public GameObject meMyselfEye;
@@ -11,7 +12,6 @@ public class StartButton : MonoBehaviour {
 
     public void OnClick()
     {
-        //explanBoard.SetActive(true);
         titleBoard.SetActive(true);
         meMyselfEye.SetActive(true);
         canvas.SetActive(true);
