@@ -2,12 +2,9 @@
 using System.Collections;
 
 public class TitleBoardController : MonoBehaviour {
-
+    //TitleBoardオブジェクトにアタッチ
     public GameObject titleObject;
     public GameObject explanBoard;
-    //public GameObject meMyselfEye;
-    //public GameObject canvas;
-    //public GameObject countBoard;
 
     void Start() {
         titleObject.SetActive(false);
@@ -21,7 +18,6 @@ public class TitleBoardController : MonoBehaviour {
             {
                 OnClick();
             }
-
         }
     }
 
@@ -30,9 +26,5 @@ public class TitleBoardController : MonoBehaviour {
         titleObject.SetActive(false);
         explanBoard.SetActive(true);
         GvrViewer.Instance.Recenter();
-        //countBoard.SetActive(true);
-        //meMyselfEye.SetActive(true);
-        //canvas.SetActive(true);
-        //canvas.GetComponent<CanvasGroup>().alpha = 0f;
     }
 }

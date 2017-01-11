@@ -3,15 +3,12 @@ using System.Collections;
 using UnityStandardAssets.Characters.ThirdPerson;
 
 public class TargetUC : MonoBehaviour {
-
+    //oniのEthanのGameObjectにアタッチ
     public GameObject walkTarget; //WalkTargetを表す変数
     public GameObject ethan; //Ethanを表す
 
-
-
     // Use this for initialization
-    void Start () {
-	
+    void Start () {	
 	}
 	
 	// Update is called once per frame

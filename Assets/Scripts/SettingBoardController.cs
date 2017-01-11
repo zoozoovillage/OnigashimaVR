@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class SettingBoardController : MonoBehaviour {
+    //SettimgBoardオブジェクトにアタッチ
     Camera mainCamera;
     Camera explanCamera;
     Camera levelSetCamera;
@@ -50,8 +51,7 @@ public class SettingBoardController : MonoBehaviour {
         modeChanger = Input.GetAxis("Vertical") * speedControler;
         valueChanger = Input.GetAxis("Horizontal") * speedControler;
         SetSelectMode();
-        //
-
+ 
         switch ((int)selectSlider.value)
         {
             case 2:
@@ -66,7 +66,6 @@ public class SettingBoardController : MonoBehaviour {
                 AllSet();
                 break;
         }
-
     }
 
     public void SetSelectMode()
@@ -76,6 +75,7 @@ public class SettingBoardController : MonoBehaviour {
         if (selectMode > 2) { selectMode = 2f; }
         selectSlider.value = selectMode;
     }
+
     public void SetSize() {
         sizeSelect.isOn  = true;
         levelSelect.isOn  = false;
@@ -85,6 +85,7 @@ public class SettingBoardController : MonoBehaviour {
         if (mazeSize > 30) { mazeSize = 30; }
         sizeSlider.value = mazeSize;  
     }
+
     public void SetLevel() {
         sizeSelect.isOn  = false;
         levelSelect.isOn  = true;
@@ -94,6 +95,7 @@ public class SettingBoardController : MonoBehaviour {
         if (mazeLevel > 10) { mazeLevel = 10; }
         levelSlider.value = mazeLevel;
     }
+
     void AllSet() {
         sizeSelect.isOn  = false;
         levelSelect.isOn  = false;
@@ -103,10 +105,8 @@ public class SettingBoardController : MonoBehaviour {
         {
             if (!Input.GetKeyDown(KeyCode.UpArrow) && !Input.GetKeyDown(KeyCode.DownArrow))
             {
-                
                 OnClick();
             }
-
         }
     }
 
@@ -133,5 +133,4 @@ public class SettingBoardController : MonoBehaviour {
         //Debug.Log("セッティングSavePのmazeLevel" + mazeLevel);
         GameManager gameManager = managaer.GetComponent<GameManager>();
     }
-
 }

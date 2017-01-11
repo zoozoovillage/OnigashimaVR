@@ -20,14 +20,11 @@ public class Director : MonoBehaviour
     IEnumerator StartTargetWithDelay()
     {
         yield return new WaitForSeconds(15);
-        Debug.Log("エージョント起動!");
+        //Debug.Log("エージョント起動!");
         WalkTarget.SetActive(true);
         UtAgentColliderScript utAgentColliderScript = Agent.GetComponent<UtAgentColliderScript>();
         utAgentColliderScript.targetActiveFlg = true;
-
     }
-
-
 
     // Update is called once per frame
     void Update()

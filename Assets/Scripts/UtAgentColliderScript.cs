@@ -3,12 +3,12 @@ using System.Collections;
 
 
 public class UtAgentColliderScript : MonoBehaviour {
+    //oniプレハブのEthanにアタッチ
     public bool targetActiveFlg;
 
     // Use this for initialization
     void Start () {
         targetActiveFlg = false;
-
     }
 	
 	// Update is called once per frame
@@ -46,7 +46,5 @@ public class UtAgentColliderScript : MonoBehaviour {
                 //Debug.Log("イーサンぶつかる");
             }
         }
-        
     }
-
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class UtGoalScript : MonoBehaviour {
+    //goalオブジェクトにアタッチ
 
     // Use this for initialization
     void Start()

@@ -3,14 +3,12 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class ShadowingTarget : MonoBehaviour {
-    //public GameObject avator;
+    //WalkTargetプレハブにアタッチ
     public GameObject targetArea;
     private bool tochuhenkou = false;
-
     private System.Random rnd;
     private float x = 0;
     private float z = 0;
-
     private bool cautionFlg = false;
 
     // Use this for initialization
@@ -24,18 +22,21 @@ public class ShadowingTarget : MonoBehaviour {
     void Update()
     {
         string TAG = targetArea.tag;
-        if (TAG == "hunter") {
+        if (TAG == "hunter")
+        {
             AddForceHunter();
-        } else if (TAG == "agentZero") {
+        }
+        else if (TAG == "agentZero")
+        {
             StartCoroutine(RePositionWithDelay());
             //Debug.Log("探査機：探索再開");
-            
         }
         if (cautionFlg)
         {
             GameObject.Find("CautionPanel").GetComponent<CanvasGroup>().alpha = 1f;
         }
-        else {
+        else
+        {
             GameObject.Find("CautionPanel").GetComponent<CanvasGroup>().alpha = 0f;
         }
 
@@ -54,16 +55,17 @@ public class ShadowingTarget : MonoBehaviour {
                     yield break; //直ちにコルーチンをやめる
                     //Debug.Log("探査機：探索終了。");
                 }               
-                if (!tochuhenkou) {
+                if (!tochuhenkou)
+                {
                     SetRandomPosition();
                     //Debug.Log("探査機：探索中");
                 }             
-            } else {
+            } else
+            {
                 yield break; //直ちにコルーチンをやめる
                 //Debug.Log("探査機：探索終了します。");
             }
         }
-
     }
 
     void SetRandomPosition()

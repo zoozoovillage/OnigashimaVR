@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class UtSphereScript : MonoBehaviour {
-
+    //球体キャラオブジェクトにアタッチ
     private Color oldc;
     private int counter = 0;//休止の期間を示すカウンタ変数
 
