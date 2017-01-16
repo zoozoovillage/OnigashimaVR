@@ -8,7 +8,9 @@ GoogleVRForUnity.unitypackageアセットパッケージを
 Unityプロジェクトに次のようにインポートしてください。
 
 1.メインメニューの[Assets]→[ImportPackage]→[CustomPackage...]を選択します。
+
 2.GoogleVRForUnity.unitypackageというファイルを見つけて選択します。
+
 3.すべてのアセットにチェックがついていることを確認して[Import]をクリックします。
 
 (開発環境：Unity5.4.2 および Windows10)
