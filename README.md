@@ -3,7 +3,8 @@
 Android用のVRアプリとして開発中。
 
 なおGoogle VR SDK for Unityを
-https://developers.google.com/vr/unity/download　からダウンロードし
+https://developers.google.com/vr/unity/download
+　からダウンロードし、
 GoogleVRForUnity.unitypackageアセットパッケージを
 Unityプロジェクトに次のようにインポートしてください。
 
