@@ -2,6 +2,20 @@
 
 Android用のVRアプリとして開発中。
 
+なおGoogle VR SDK for Unityを
+https://developers.google.com/vr/unity/download
+　からダウンロードし、
+GoogleVRForUnity.unitypackageアセットパッケージを
+Unityプロジェクトに次のようにインポートしてください。
+
+1.メインメニューの[Assets]→[ImportPackage]→[CustomPackage...]を選択します。
+
+2.GoogleVRForUnity.unitypackageというファイルを見つけて選択します。
+
+3.すべてのアセットにチェックがついていることを確認して[Import]をクリックします。
+
+(開発環境：Unity5.4.2 および Windows10)
+
 本ゲームを楽しむためにはVR用のヘッドマウントディスプレイと
 コントローラーが必要です。
 
@@ -10,6 +24,7 @@ https://www.amazon.co.jp/Linkcool-Google-Cardboard-%E3%82%B0%E3%83%BC%E3%82%B0%E
 
 参考商品: コントローラー
 https://www.amazon.co.jp/JPUP-%E3%83%96%E3%83%AB%E3%83%BC%E3%83%88%E3%82%A5%E3%83%BC%E3%82%B9%E6%90%BA%E5%B8%AF%E3%83%AA%E3%83%A2%E3%82%B3%E3%83%B3-%E3%82%B9%E3%83%9E%E3%83%BC%E3%83%88%E3%83%95%E3%82%A9%E3%83%B3%E7%94%A8%E3%83%AA%E3%83%A2%E3%82%B3%E3%83%B3Bluetooth%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9-%E3%81%AA%E3%81%A9%E6%A9%9F%E8%83%BD%E4%BB%98%E3%81%8DPC%E3%83%91%E3%82%BD%E3%82%B3%E3%83%B3-iPhone-Android/dp/B01MRXQCV4/ref=sr_1_24?ie=UTF8&qid=1484029286&sr=8-24&keywords=VR
+
 
 【変更履歴】
 
@@ -36,3 +51,5 @@ https://www.amazon.co.jp/JPUP-%E3%83%96%E3%83%AB%E3%83%BC%E3%83%88%E3%82%A5%E3%8
 20170110 変更点: ゴーグルを装着したまま操作できるようにタイトルを２段階に修正した。
 
 20170111 変更点: マージにより発生したエラーに対応した。
+
+20170116 変更点: README.mdの記述を修正した。
